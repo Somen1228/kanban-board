@@ -74,6 +74,10 @@ body {
     background: green;
 }
 
+.remove-btn:hover {
+    background: rgb(157, 10, 10);
+}
+
 .main-cont {
     display: flex;
     justify-content: center;
