@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar (Toolbox)    -->
+    <nav class="toolbox-cont">
+        <div class="toolbox-priority-cont">
+            <div class="lightpink color"></div>
+            <div class="lightgreen color"></div>
+            <div class="lightblue color"></div>
+            <div class="black color"></div>
+        </div>
+        <!-- Add and Delete Button -->
+        <div class="action-btn-cont">
+            <div class="add-btn">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+
+            <div class="remove-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-cont">
+        <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id">123456</div>
+            <div class="task-area">This is the text of the task</div>
+            <div class="ticket-lock">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-cont">
+        <textarea class="text-area-cont"></textarea>
+        <div class="priority-colors-container">
+            <div class="priority-color lightpink"></div>
+            <div class="priority-color lightgreen"></div>
+            <div class="priority-color lightblue"></div>
+            <div class="priority-color black active"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
