@@ -74,6 +74,9 @@ removeBtn.addEventListener('click', () => {
     }
 })
 
+//Event listener for lock
+
+
 
 //Function to add a new ticket/task
 function createTicket(ticketId, taskContent, modalPriorityColor) {
@@ -82,27 +85,26 @@ function createTicket(ticketId, taskContent, modalPriorityColor) {
     ticketCont.classList.add("ticket-cont");
 
     ticketCont.innerHTML =
-        `
-    <div class="ticket-color ${modalPriorityColor}"></div>
-    <div class="ticket-id">${ticketId}</div>
-    <div class="task-area">${taskContent}</div>
-    <div class="ticket-lock">
-        <i class="fa-solid fa-lock"></i>
-    </div>
+    `
+        <div class="ticket-color ${modalPriorityColor}"></div>
+        <div class="ticket-id">${ticketId}</div>
+        <div class="task-area">${taskContent}</div>
+        <div class="ticket-lock">
+            <i class="fa-solid fa-lock"></i>
+        </div>
     `
 
     mainCont.appendChild(ticketCont)
 
     // //Adding change-priority-color feature 
-    // const ticketColor = ticketCont.querySelector(".ticket-color")
-    // changeBandColor(ticketColor)
-
-
+    changeBandColor(ticketCont)
+    handleLock(ticketCont)
     //calling the removal function
     handleRemoval(ticketCont)
 }
 
-function changeBandColor(ticketColor) {
+function changeBandColor(ticketCont) {
+    const ticketColor = ticketCont.querySelector(".ticket-color")
     ticketColor.addEventListener('click', () => {
         const bandColor = ticketColor.classList[1];
 
@@ -128,4 +130,28 @@ function handleRemoval(ticketCont) {
             ticketCont.remove();
         }
     })
+}
+
+
+//Function to lock/unlock the lock icon
+function handleLock(ticketCont) {
+    const ticketLockElement = ticketCont.querySelector(".ticket-lock")
+    //Selecting the icon element
+    const ticketLockIcon = ticketLockElement.children[0];
+    //Selecting the taskArea to enable editing
+    const taskArea = ticketCont.querySelector(".task-area")
+
+    ticketLockIcon.addEventListener('click', () => {
+        if(ticketLockIcon.classList.contains("fa-lock")) {
+            ticketLockIcon.classList.remove("fa-lock")
+            ticketLockIcon.classList.add("fa-unlock")
+            taskArea.setAttribute("contenteditable", "true"); //editable
+        } else {
+            ticketLockIcon.classList.add("fa-lock")
+            ticketLockIcon.classList.remove("fa-unlock")
+            taskArea.setAttribute("contenteditable", "false"); //non-editable
+        }
+    })
+   
+    
 }
