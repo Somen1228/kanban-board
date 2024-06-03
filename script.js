@@ -35,7 +35,6 @@ allPriorityColors.forEach(function(colorElement) {
         
         //Add active class from all the containers
         colorElement.classList.add("active");
-
         //Storing the current selected color into a variable
         modalPriorityColor = colorElement.getAttribute("colorVal");
     })
@@ -43,11 +42,11 @@ allPriorityColors.forEach(function(colorElement) {
 
 //Adding task
 modalCont.addEventListener('keydown', (e) => {
-    let value = e.target.value;
+    const taskContent = e.target.value;
+    const ticketId = shortid();
 
     if(e.key == 'Shift') {
-        createTicket(value, modalPriorityColor);
-
+        createTicket(ticketId, taskContent, modalPriorityColor);
         //Hide the modal as soon as shift is pressed
         modalCont.style.display = "none";
         //Toggling the display flag of the modal
@@ -58,7 +57,7 @@ modalCont.addEventListener('keydown', (e) => {
 })
 
 //Function to add a new ticket/task
-function createTicket(value, modalPriorityColor) {
+function createTicket(ticketId, taskContent, modalPriorityColor) {
     //Create a new ticket container element
     const ticketCont = document.createElement("div")
     ticketCont.classList.add("ticket-cont");
@@ -66,8 +65,8 @@ function createTicket(value, modalPriorityColor) {
     ticketCont.innerHTML = 
     `
     <div class="ticket-color ${modalPriorityColor}"></div>
-    <div class="ticket-id">123456</div>
-    <div class="task-area">${value}</div>
+    <div class="ticket-id">${ticketId}</div>
+    <div class="task-area">${taskContent}</div>
     <div class="ticket-lock">
         <i class="fa-solid fa-lock"></i>
     </div>

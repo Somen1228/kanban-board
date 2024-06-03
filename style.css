@@ -75,7 +75,7 @@ body {
 }
 
 .remove-btn:hover {
-    background: rgb(157, 10, 10);
+    background: rgb(194, 29, 29);
 }
 
 .main-cont {
@@ -142,6 +142,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    cursor:pointer;
 }
 
 .priority-color {
