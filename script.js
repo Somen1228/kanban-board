@@ -95,21 +95,14 @@ function createTicket(ticketId, taskContent, modalPriorityColor) {
     `
 
     mainCont.appendChild(ticketCont)
+    taskArray.push({ ticketId, taskContent, modalPriorityColor })
 
-    changeBandColor(ticketCont)
-    handleLock(ticketCont)
+    changeBandColor(ticketCont, ticketId) 
+    handleLock(ticketCont, ticketId)
     handleRemoval(ticketCont)
-
-    taskArray.push({
-        ticketId: ticketId,
-        taskContent: taskContent,
-        modalPriorityColor: modalPriorityColor
-    })
-
-    console.log(taskArray);
 }
 
-function changeBandColor(ticketCont) {
+function changeBandColor(ticketCont, ticketId) {
 //     const ticketColor = ticketCont.querySelector(".ticket-color")
 //     ticketColor.addEventListener('click', () => {
 //         const bandColor = ticketColor.classList[1];
@@ -135,10 +128,18 @@ function changeBandColor(ticketCont) {
             })
 
             currentColorIndex++
-
             currentColorIndex %= colors.length;
+            const newColor = colors[currentColorIndex]
+
             colorElem.classList.remove(currentColor)
-            colorElem.classList.add(colors[currentColorIndex])
+            colorElem.classList.add(newColor)
+
+            const currentTask = taskArray.find((currentStepFilter) => {
+                return currentStepFilter.ticketId == ticketId
+            })
+
+            currentTask.modalPriorityColor = newColor
+            // console.log({taskArray});
         })     
 }
 
