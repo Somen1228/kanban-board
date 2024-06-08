@@ -13,7 +13,7 @@ let removeTaskFlag = false;
 //Variables
 let modalPriorityColor = "black";
 const colors = ["lightpink", "lightgreen", "lightblue", "black"]
-
+const taskArray = []
 //Modal pop-up
 addBtn.addEventListener('click', () => {
     addTaskFlag = !addTaskFlag;
@@ -96,30 +96,50 @@ function createTicket(ticketId, taskContent, modalPriorityColor) {
 
     mainCont.appendChild(ticketCont)
 
-    // //Adding change-priority-color feature 
     changeBandColor(ticketCont)
     handleLock(ticketCont)
-    //calling the removal function
     handleRemoval(ticketCont)
+
+    taskArray.push({
+        ticketId: ticketId,
+        taskContent: taskContent,
+        modalPriorityColor: modalPriorityColor
+    })
+
+    console.log(taskArray);
 }
 
 function changeBandColor(ticketCont) {
-    const ticketColor = ticketCont.querySelector(".ticket-color")
-    ticketColor.addEventListener('click', () => {
-        const bandColor = ticketColor.classList[1];
+//     const ticketColor = ticketCont.querySelector(".ticket-color")
+//     ticketColor.addEventListener('click', () => {
+//         const bandColor = ticketColor.classList[1];
+// 
+//         let index = 0;
+//         colors.forEach((color, idx) => {
+//             if (color == bandColor && idx != colors.length - 1) {
+//                 index = idx + 1;
+//             }
+//         })
+// 
+//         let newColor = colors[index];
+// 
+//         ticketColor.classList.remove(bandColor)
+//         ticketColor.classList.add(newColor)
+//     })
+        //Other way to do the same
+        const colorElem = ticketCont.querySelector(".ticket-color")
+        colorElem.addEventListener('click', () => {
+            const currentColor = colorElem.classList[1]
+            let currentColorIndex = colors.findIndex((currentStepColor) => {
+                return currentStepColor == currentColor;
+            })
 
-        let index = 0;
-        colors.forEach((color, idx) => {
-            if (color == bandColor && idx != colors.length - 1) {
-                index = idx + 1;
-            }
-        })
+            currentColorIndex++
 
-        let newColor = colors[index];
-
-        ticketColor.classList.remove(bandColor)
-        ticketColor.classList.add(newColor)
-    })
+            currentColorIndex %= colors.length;
+            colorElem.classList.remove(currentColor)
+            colorElem.classList.add(colors[currentColorIndex])
+        })     
 }
 
 //Function to handle removal 
