@@ -25,12 +25,10 @@ const array = [
     },
 ]
 
-const value = array.find((currStep) => {
-    return currStep.id == "2e4rd"
+const value = array.findIndex((currStep) => {
+    return currStep.id == "2e5rd"
 })
 
-console.log(value);
-value.id = "2e99rd"
-
+array.splice(value, 2)
 console.log(array);
 

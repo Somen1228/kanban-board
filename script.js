@@ -99,7 +99,9 @@ function createTicket(ticketId, taskContent, modalPriorityColor) {
 
     changeBandColor(ticketCont, ticketId) 
     handleLock(ticketCont, ticketId)
-    handleRemoval(ticketCont)
+    handleRemoval(ticketCont, ticketId)
+
+    console.log({taskArray});
 }
 
 function changeBandColor(ticketCont, ticketId) {
@@ -145,17 +147,27 @@ function changeBandColor(ticketCont, ticketId) {
 
 //Function to handle removal 
 
-function handleRemoval(ticketCont) {
+function handleRemoval(ticketCont, taskId) {
     ticketCont.addEventListener('click', () => {
+
         if(removeTaskFlag) {
             ticketCont.remove();
+
+            //Removing from array object
+            const currentTaskIndex = taskArray.findIndex((currentStepTask) => {
+                return taskId == currentStepTask.ticketId
+            })
+    
+            taskArray.splice(currentTaskIndex, 1)
         }
+
+        console.log(taskArray);
     })
 }
 
 
 //Function to lock/unlock the lock icon
-function handleLock(ticketCont) {
+function handleLock(ticketCont, ticketId) {
     const ticketLockElement = ticketCont.querySelector(".ticket-lock")
     //Selecting the icon element
     const ticketLockIcon = ticketLockElement.children[0];
@@ -171,8 +183,13 @@ function handleLock(ticketCont) {
             ticketLockIcon.classList.add("fa-lock")
             ticketLockIcon.classList.remove("fa-unlock")
             taskArea.setAttribute("contenteditable", "false"); //non-editable
-        }
-    })
-   
+
+            const currentTask = taskArray.find((currentStepFilter) => {
+                return currentStepFilter.ticketId == ticketId
+            })
     
+            currentTask.taskContent = taskArea.innerHTML
+            // console.log({taskArray});
+        }       
+    })
 }
