@@ -159,6 +159,7 @@ function changeBandColor(ticketCont, ticketId) {
             })
 
             currentTask.modalPriorityColor = newColor
+            localStorage.setItem('tickets', JSON.stringify(taskArray))
             // console.log({taskArray});
         })     
 }
@@ -177,6 +178,7 @@ function handleRemoval(ticketCont, taskId) {
             })
     
             taskArray.splice(currentTaskIndex, 1)
+            localStorage.setItem('tickets', JSON.stringify(taskArray))
         }
 
         console.log(taskArray);
@@ -207,6 +209,8 @@ function handleLock(ticketCont, ticketId) {
             })
     
             currentTask.taskContent = taskArea.innerHTML
+            localStorage.setItem('tickets', JSON.stringify(taskArray))
+
             // console.log({taskArray});
         }       
     })
