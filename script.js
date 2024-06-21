@@ -15,6 +15,22 @@ let removeTaskFlag = false;
 let modalPriorityColor = "black";
 const colors = ["lightpink", "lightgreen", "lightblue", "black"]
 const taskArray = []
+
+//Check if we already have data inside local storage
+
+if(localStorage.getItem('tickets')) {
+    try {
+        const ticketsArray = JSON.parse(localStorage.getItem('tickets'))
+
+        ticketsArray.forEach((ticket) => {
+            createTicket(ticket.ticketId, ticket.taskContent, ticket.modalPriorityColor)
+        })
+    } catch (error) {
+        console.log("There seems to be some error")
+    }
+}
+
+
 //Modal pop-up
 addBtn.addEventListener('click', () => {
     addTaskFlag = !addTaskFlag;
@@ -33,7 +49,7 @@ addBtn.addEventListener('click', () => {
 allPriorityColors.forEach(function (colorElement) {
     colorElement.addEventListener('click', (e) => {
         //Remove active class from all the containers
-        allPriorityColors.forEach(function (curr) {
+        allPriorityColors.forEach(function (curr) { 
             curr.classList.remove("active")
         })
 
@@ -95,14 +111,15 @@ function createTicket(ticketId, taskContent, modalPriorityColor) {
         </div>
     `
 
-    mainCont.appendChild(ticketCont)
     taskArray.push({ ticketId, taskContent, modalPriorityColor })
-
+    
     changeBandColor(ticketCont, ticketId) 
     handleLock(ticketCont, ticketId)
     handleRemoval(ticketCont, ticketId)
 
-    console.log({taskArray});
+    //Adding a local storage
+    localStorage.setItem('tickets', JSON.stringify(taskArray))
+    mainCont.appendChild(ticketCont)
 }
 
 function changeBandColor(ticketCont, ticketId) {
