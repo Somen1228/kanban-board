@@ -1,5 +1,6 @@
 //Selections
 const modalCont = document.querySelector(".modal-cont")
+const allFilterColors = document.querySelectorAll(".toolbox-priority-cont > .color")
 const addBtn = document.querySelector(".add-btn")
 const removeBtn = document.querySelector(".remove-btn")
 const textArea = document.querySelector(".text-area-cont")
@@ -193,3 +194,22 @@ function handleLock(ticketCont, ticketId) {
         }       
     })
 }
+
+allFilterColors.forEach((colorElem) => {
+
+    colorElem.addEventListener('click', (e) => {
+        const selectFilterColor = colorElem.classList[0]
+        
+        const filteredArray = taskArray.filter((currTask) => {
+            return currTask.modalPriorityColor == selectFilterColor
+        })
+
+        //Remove all task from the screen
+        mainCont.innerHTML = ""
+
+        //Add back task from filtered array
+        filteredArray.forEach((task) => {
+            createTicket(task.taskId, task.taskContent, task.modalPriorityColor)
+        })
+    })
+})
